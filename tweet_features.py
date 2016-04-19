@@ -73,7 +73,7 @@ def make_tweet_nparr( txt ):
     fvec = numpy.empty( len(testFeatures) )
 
     # search for each feature
-    txtLow = ' ' + txt.lower() + ' '
+    txtLow = ' ' + txt[0][0].lower() + ' '
     for i in range( 0, len(testFeatures) ):
 
         key = testFeatures[i][0]
@@ -89,7 +89,7 @@ def make_tweet_dict( txt ):
     """ 
     Extract tweet feature vector as dictionary. 
     """
-    txtLow = ' ' + txt.lower() + ' '
+    txtLow = ' ' + txt[0][0].lower() + ' '
 
     # result storage
     fvec = {}

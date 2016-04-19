@@ -13,17 +13,17 @@ the influence of covariant features.
 import csv, random
 import nltk
 import tweet_features, tweet_pca
-
+#import pdb
 
 # read all tweets and labels
 fp = open( 'sentiment.csv', 'rb' )
 reader = csv.reader( fp, delimiter=',', quotechar='"', escapechar='\\' )
 tweets = []
 for row in reader:
-    tweets.append( [row[3], row[4]] );
+    #tweets.append( [row[1], row[4]] );
     text = nltk.word_tokenize(row[1], language='english')
-    #text = nltk.pos_tag(text)
-    #tweets.append(text)
+    text = nltk.pos_tag(text)
+    tweets.append([text,row[4]])
 #added: pos tag is added as feature
 print tweets
 
@@ -34,17 +34,17 @@ for t in tweets:
 
 
 # split in to training and test sets
-random.shuffle( tweets );
-
+random.shuffle(tweets)
+#pdb.set_trace()
 fvecs = [(tweet_features.make_tweet_dict(t),s) for (t,s) in tweets]
-v_train = fvecs[:4]
-v_test  = fvecs[:4]
+v_train = fvecs[:10]
+v_test  = fvecs[:10]
 
 
 # dump tweets which our feature selector found nothing
-for i in range(0,len(tweets)):
-    if tweet_features.is_zero_dict( fvecs[i][0] ):
-        print tweets[i][1] + ': ' + tweets[i][0]
+#for i in range(0,len(tweets)):
+#    if tweet_features.is_zero_dict( fvecs[i][0] ):
+#        print tweets[i][1] + ': ' + tweets[i][0]
 
 
 # apply PCA reduction
