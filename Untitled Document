@@ -1,0 +1,50 @@
+            precision    recall  f1-score   support
+
+   negative       0.85      0.08      0.14       291
+    neutral       0.79      1.00      0.89      2008
+   positive       1.00      0.03      0.05       258
+
+avg / total       0.82      0.80      0.72      2557
+
+Confusion Matrix
+         |    n         p |
+         |    e    n    o |
+         |    g    e    s |
+         |    a    u    i |
+         |    t    t    t |
+         |    i    r    i |
+         |    v    a    v |
+         |    e    l    e |
+---------+----------------+
+negative |  <23> 268    . |
+ neutral |    3<2005>   . |
+positive |    1  250   <7>|
+---------+----------------+
+(row = reference; col = test)
+
+#snowball relevant words
+             precision    recall  f1-score   support
+
+   negative       0.87      0.12      0.21       278
+    neutral       0.80      1.00      0.89      2014
+   positive       0.86      0.02      0.04       265
+
+avg / total       0.81      0.80      0.73      2557
+
+Confusion Matrix
+         |    n         p |
+         |    e    n    o |
+         |    g    e    s |
+         |    a    u    i |
+         |    t    t    t |
+         |    i    r    i |
+         |    v    a    v |
+         |    e    l    e |
+---------+----------------+
+negative |  <34> 244    . |
+ neutral |    5<2008>   1 |
+positive |    .  259   <6>|
+---------+----------------+
+(row = reference; col = test)
+
+

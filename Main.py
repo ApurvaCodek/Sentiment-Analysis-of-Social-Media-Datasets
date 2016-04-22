@@ -16,11 +16,14 @@ from sklearn.metrics import classification_report
 
 def split_list(a_list):
     half = len(a_list)/2
-    return a_list[:100], a_list[100:200]
+    return a_list[:half], a_list[half:]
 
-def get_words_in_tweets(tweets):
+def get_words_in_tweets(tweets, stopper):
 	all_words = []
 	for (words, sentiment) in tweets:
+		for i in words:	
+			if stopper.find(i) != -1:
+				words.remove(i)
 		all_words.extend(words)
 	return all_words
 
@@ -42,10 +45,9 @@ test_data = []
 #training corpus has the elements: Topic/sentiment/tweet id/tweet date/tweet text
 #tweets are shuffed before partitioining into training and test data
 
-text_file = open("minimal-stop.txt", "r")
-stoplines = text_file.readlines()
-for i in stoplines:
-	print i
+with open('minimal-stop.txt', 'r') as myfile:
+    stop_data=myfile.read().replace('\n', '')
+
 f = csv.reader(open("full-corpus.csv", "rb"), delimiter = ',', skipinitialspace = True)
 flist = list(f)
 tweets = iter(flist)
@@ -65,8 +67,7 @@ print 'training and test data has been constructed'
 print 'training data length:%d' %len(train_data)
 print 'test data length:%d' %len(test_data)
 
-
-word_features = get_word_features(get_words_in_tweets(train_data))
+word_features = get_word_features(get_words_in_tweets(train_data, stop_data))
 training_set = nltk.classify.apply_features(extract_features,train_data)
 classifier = nltk.NaiveBayesClassifier.train(training_set);
 print 'classifier defined'
