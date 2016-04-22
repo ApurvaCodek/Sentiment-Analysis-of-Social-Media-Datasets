@@ -5,12 +5,14 @@ import os
 import sys
 import csv
 import pdb
+import time
 from random import shuffle
 import re, math, collections, itertools
 import nltk, nltk.classify.util, nltk.metrics
 from nltk.metrics import BigramAssocMeasures
-from nltk.probability import FreqDist, ConditionalFreqDist
+from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import precision_recall_fscore_support as pr
+from sklearn.metrics import classification_report
 
 def split_list(a_list):
     half = len(a_list)/2
@@ -31,8 +33,6 @@ def extract_features(document):
 	document_words = set(document)
 	features = {}
 	for word in word_features:
-            if isinstance(word,"the"):
-                continue
 	    features['contains(%s)' % word] = (word in document_words)
 	return features
 data = []
@@ -41,6 +41,11 @@ test_data = []
 
 #training corpus has the elements: Topic/sentiment/tweet id/tweet date/tweet text
 #tweets are shuffed before partitioining into training and test data
+
+text_file = open("minimal-stop.txt", "r")
+stoplines = text_file.readlines()
+for i in stoplines:
+	print i
 f = csv.reader(open("full-corpus.csv", "rb"), delimiter = ',', skipinitialspace = True)
 flist = list(f)
 tweets = iter(flist)
@@ -49,15 +54,22 @@ for lines in tweets:
 	words = lines[4]
 	sentiment = lines[1]
 	words_filtered = [e.lower() for e in words.split() if len(e) >= 3]
+	# treat neutral and irrelevant the same
+    	if sentiment == 'irrelevant':
+        	sentiment = 'neutral'
 	data.append((words_filtered, sentiment))
 	
 shuffle(data)
 train_data, test_data = split_list(data)
+print 'training and test data has been constructed'
+print 'training data length:%d' %len(train_data)
+print 'test data length:%d' %len(test_data)
 
 
 word_features = get_word_features(get_words_in_tweets(train_data))
 training_set = nltk.classify.apply_features(extract_features,train_data)
-classifier = nltk.NaiveBayesClassifier.train(training_set)
+classifier = nltk.NaiveBayesClassifier.train(training_set);
+print 'classifier defined'
 
 predicted = []
 observed  = []
@@ -75,6 +87,13 @@ print('fscore: {}'.format(fscore))
 print ('Most Informative Features :')
 classifier.show_most_informative_features(5)
 
+print(classification_report(observed, predicted, target_names=['negative','neutral','positive']))
+
+print 'Confusion Matrix'
+print nltk.ConfusionMatrix( observed, predicted )
+
+
+
 
 #fill out frequecy distributions, incrementing the counter of each word
 #within the appropriate distribution
@@ -83,11 +102,12 @@ classifier.show_most_informative_features(5)
     cond_word_fd = ConditionalFreqDist()
     for items in training_data:
         if (items[1] == 'positive'):
-            cond_word_fd['positive'][items[0]] +=1
+	    for i in items[0]:
+            	cond_word_fd['positive'].inc(items[0])
         elif(items[1] == 'negative'):
-            cond_word_fd['negative'][items[0]] +=1
+            cond_word_fd['negative'].inc(items[0])
         elif(items[1] == 'neutral'):
-            cond_word_fd['neutral'][items[0]] +=1
+            cond_word_fd['neutral'].(items[0])
     pdb.set_trace()
     #count of words in positive negative and neutral
     pos_word_count = cond_word_fd['positive'].N()
@@ -114,10 +134,10 @@ def best_word_feats(word_scores, number):
     return best_words
 
 def best_word_features(words):
-    return dict([(word, True) for word in words if word in best_words])
+    return dict([(word, True) for word in words if word in best_words])"""
 
 
-numbers_to_test = 1000
+"""numbers_to_test = 1000
 #tries the best_word_features mechanism with each of the numbers_to_test of features
 print 'evaluating best %d word features' % (numbers_to_test)
 word_scores = create_word_scores(train_data)
