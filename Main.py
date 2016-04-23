@@ -53,13 +53,13 @@ flist = list(f)
 tweets = iter(flist)
 next(tweets)
 for lines in tweets:
-	words = lines[4]
-	sentiment = lines[1]
-	words_filtered = [e.lower() for e in words.split() if len(e) >= 3]
-	# treat neutral and irrelevant the same
-    	if sentiment == 'irrelevant':
-        	sentiment = 'neutral'
-	data.append((words_filtered, sentiment))
+    words = lines[4]
+    sentiment = lines[1]
+    words_filtered = [e.lower() for e in words.split() if len(e) >= 3]
+    # treat neutral and irrelevant the same
+    #if sentiment == 'irrelevant':
+    #   sentiment = 'neutral'
+    data.append((words_filtered, sentiment))
 	
 shuffle(data)
 train_data, test_data = split_list(data)
@@ -88,7 +88,7 @@ print('fscore: {}'.format(fscore))
 print ('Most Informative Features :')
 classifier.show_most_informative_features(5)
 
-print(classification_report(observed, predicted, target_names=['negative','neutral','positive']))
+print(classification_report(observed, predicted, target_names=['negative','neutral','positive','irrelevant']))
 
 print 'Confusion Matrix'
 print nltk.ConfusionMatrix( observed, predicted )
