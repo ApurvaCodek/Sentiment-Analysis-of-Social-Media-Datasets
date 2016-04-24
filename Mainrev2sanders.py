@@ -15,10 +15,14 @@ from nltk.util import ngrams
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import precision_recall_fscore_support as pr
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, accuracy_score
 
 from string import punctuation
 
+emoticons = [':-)',':-(',';-)',':-D',
+            ':-[',':-\\','=-0',':-*',
+            '>:o','8-)',':-$',':-!',
+            'O:-)',':\'(',':-X']
 def strip_punctuation(s):
     return ''.join(c for c in s if c not in punctuation)
     
@@ -26,6 +30,28 @@ def split_list(a_list):
     half = len(a_list)/2
     return a_list[:half], a_list[half:]
 
+def find_emoticons(sentence):
+    sentence = sentence.replace(':-)' ,'emocsmile')
+    sentence = sentence.replace(':)'  ,'emocsmile')
+    sentence = sentence.replace(':))' ,'emocsmile')
+    sentence = sentence.replace(':-(' ,'emocsad')
+    sentence = sentence.replace(':('  ,'emocsad')
+    sentence = sentence.replace(':((' ,'emocsad')
+    sentence = sentence.replace(';-)' ,'emocwink')
+    sentence = sentence.replace(':-D' ,'emoctongue')
+    sentence = sentence.replace(':-[' ,'emocembrassed')
+    sentence = sentence.replace(':-\\','emocundecided')
+    sentence = sentence.replace('=-0' ,'emocsurprise')
+    sentence = sentence.replace(':-*' ,'emockiss')
+    sentence = sentence.replace('>:o' ,'emocyell')
+    sentence = sentence.replace('8-)' ,'emoccool')
+    sentence = sentence.replace(':-$' ,'emocmoney')
+    sentence = sentence.replace(':-!' ,'emocfoot')
+    sentence = sentence.replace('O:-)','emocinnocent')
+    sentence = sentence.replace(':\'(','emoccry')
+    sentence = sentence.replace(':-X' ,'emocsealed')
+    return sentence
+    
 def remove_stoppers(sentence,stopset):
     querywords  = sentence.split()
     resultwords = sentence.split()
@@ -56,8 +82,6 @@ def extract_features(document):
     
 def bigramReturner (tweetString):
     tweetString = tweetString.lower()
-    #remove punctuation
-    tweetString = strip_punctuation(tweetString)
     bigramFeatureVector = []
     for item in nltk.bigrams(tweetString.split()):
         bigramFeatureVector.append(' '.join(item))
@@ -80,6 +104,8 @@ test_data_bi, test_data_tri = [],[]
 predicted_bi, predicted_tri = [],[]
 observed_bi, observed_tri  = [],[]
 
+
+
 #stopset = set(stopwords.words('english'))
 with open('minimal-stop.txt', 'r') as myfile:
     stopset = myfile.read().replace('\n', ' ')
@@ -99,8 +125,9 @@ next(tweets)
 for flines in tweets:
     sentence = flines[4]
     sentiment = flines[1]
+    sentence = find_emoticons(sentence)
     sentence = strip_punctuation(sentence)
-    #sentence = remove_stoppers(sentence,stopset)
+    sentence = remove_stoppers(sentence,stopset)
     
     bigram_sentence = bigramReturner(sentence)
     trigram_sentence = trigramReturner(sentence)
@@ -113,7 +140,7 @@ c = list(zip(data, bigram_data, trigram_data))
 shuffle(c)
 data, bigram_data, trigram_data = zip(*c)
 
-train_data, test_data = split_list(data)
+test_data, train_data = split_list(data)
 print 'training and test data has been constructed'
 print 'training data length:%d' %len(train_data)
 print 'test data length:%d' %len(test_data)
@@ -147,6 +174,7 @@ for items in test_data:
 #print word_features
 classifier.show_most_informative_features(5)
 print(classification_report(observed, predicted, target_names=['irrelevant','negative','neutral','positive']))
+print "The accuracy score is {:.2%}".format(accuracy_score(observed, predicted))
 
 print 'Confusion Matrix'
 print nltk.ConfusionMatrix( observed, predicted )
@@ -155,7 +183,7 @@ print nltk.ConfusionMatrix( observed, predicted )
 
 #####bigarm features
 
-train_data_bi, test_data_bi = split_list(bigram_data)
+test_data_bi, train_data_bi = split_list(bigram_data)
 print 'training and test data has been constructed for bigram'
 print 'training data length:%d' %len(train_data_bi)
 print 'test data length:%d' %len(test_data_bi)
@@ -176,7 +204,7 @@ for items in test_data_bi:
 #print word_features
 classifier.show_most_informative_features(5)
 print(classification_report(observed_bi, predicted_bi, target_names=['irrelevant','negative','neutral','positive']))
-
+print "The accuracy score is {:.2%}".format(accuracy_score(observed_bi, predicted_bi,))
 print 'Confusion Matrix'
 print nltk.ConfusionMatrix( observed_bi, predicted_bi )
 
@@ -184,7 +212,7 @@ print nltk.ConfusionMatrix( observed_bi, predicted_bi )
 
 #####trigram features
 
-train_data_tri, test_data_tri = split_list(trigram_data)
+test_data_tri, train_data_tri = split_list(trigram_data)
 print 'training and test data has been constructed for trigram'
 print 'training data length:%d' %len(train_data_tri)
 print 'test data length:%d' %len(test_data_tri)
@@ -205,6 +233,7 @@ for items in test_data_tri:
 #print word_features
 classifier.show_most_informative_features(5)
 print(classification_report(observed_tri, predicted_tri, target_names=['irrelevant','negative','neutral','positive']))
+print "The accuracy score is {:.2%}".format(accuracy_score(observed_tri, predicted_tri))
 
 print 'Confusion Matrix'
 print nltk.ConfusionMatrix( observed_tri, predicted_tri)

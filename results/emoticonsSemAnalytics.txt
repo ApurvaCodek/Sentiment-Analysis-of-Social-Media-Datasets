@@ -1,0 +1,167 @@
+training and test data has been constructed
+training data length:2556
+test data length:2557
+test data stats
+positive  sentiment:269
+negative  sentiment:276
+neutral   sentiment:1172
+irrelevant sentiment:840
+classifier defined
+Most Informative Features
+           contains(que) = True           irrele : neutra =     65.9 : 1.0
+           contains(all) = True           negati : irrele =     44.8 : 1.0
+        contains(thanks) = True           positi : irrele =     37.3 : 1.0
+           contains(now) = True           positi : irrele =     37.3 : 1.0
+          contains(with) = True           positi : irrele =     34.5 : 1.0
+             precision    recall  f1-score   support
+
+ irrelevant       0.97      0.76      0.85       840
+   negative       0.83      0.11      0.19       276
+    neutral       0.62      0.98      0.76      1172
+   positive       1.00      0.01      0.01       269
+
+avg / total       0.80      0.71      0.65      2557
+
+Confusion Matrix
+           |    i                |
+           |    r                |
+           |    r    n         p |
+           |    e    e    n    o |
+           |    l    g    e    s |
+           |    e    a    u    i |
+           |    v    t    t    t |
+           |    a    i    r    i |
+           |    n    v    a    v |
+           |    t    e    l    e |
+-----------+---------------------+
+irrelevant | <638>   .  202    . |
+  negative |    1  <30> 245    . |
+   neutral |   16    3<1153>   . |
+  positive |    2    3  262   <2>|
+-----------+---------------------+
+(row = reference; col = test)
+
+training and test data has been constructed for bigram
+training data length:2556
+test data length:2557
+classifier defined
+
+======= RESTART: C:\Users\buse\Documents\Sentiment\Mainrev2sanders.py =======
+training and test data has been constructed
+training data length:2556
+test data length:2557
+test data stats
+positive  sentiment:261
+negative  sentiment:286
+neutral   sentiment:1155
+irrelevant sentiment:855
+classifier defined
+Most Informative Features
+        contains(thanks) = True           positi : irrele =     35.5 : 1.0
+           contains(que) = True           irrele : neutra =     35.0 : 1.0
+          contains(your) = True           neutra : irrele =     34.2 : 1.0
+           contains(why) = True           negati : irrele =     33.9 : 1.0
+           contains(all) = True           negati : irrele =     33.9 : 1.0
+             precision    recall  f1-score   support
+
+ irrelevant       0.96      0.77      0.86       855
+   negative       0.91      0.10      0.19       286
+    neutral       0.62      0.98      0.76      1155
+   positive       1.00      0.02      0.03       261
+
+avg / total       0.81      0.71      0.65      2557
+
+Confusion Matrix
+           |    i                |
+           |    r                |
+           |    r    n         p |
+           |    e    e    n    o |
+           |    l    g    e    s |
+           |    e    a    u    i |
+           |    v    t    t    t |
+           |    a    i    r    i |
+           |    n    v    a    v |
+           |    t    e    l    e |
+-----------+---------------------+
+irrelevant | <657>   .  198    . |
+  negative |    5  <30> 251    . |
+   neutral |   17    2<1136>   . |
+  positive |    2    1  254   <4>|
+-----------+---------------------+
+(row = reference; col = test)
+
+training and test data has been constructed for bigram
+training data length:2556
+test data length:2557
+classifier defined
+Most Informative Features
+    contains(on twitter) = True           neutra : irrele =     21.0 : 1.0
+contains(icecream sandwich) = True           positi : neutra =     19.7 : 1.0
+         contains(ios 5) = True           negati : neutra =     18.9 : 1.0
+  contains(google nexus) = True           positi : neutra =     16.7 : 1.0
+     contains(iphone 4s) = True           positi : irrele =     16.1 : 1.0
+             precision    recall  f1-score   support
+
+ irrelevant       0.96      0.45      0.61       855
+   negative       1.00      0.04      0.07       286
+    neutral       0.54      0.99      0.70      1155
+   positive       1.00      0.02      0.03       261
+
+avg / total       0.78      0.60      0.53      2557
+
+Confusion Matrix
+           |    i                |
+           |    r                |
+           |    r    n         p |
+           |    e    e    n    o |
+           |    l    g    e    s |
+           |    e    a    u    i |
+           |    v    t    t    t |
+           |    a    i    r    i |
+           |    n    v    a    v |
+           |    t    e    l    e |
+-----------+---------------------+
+irrelevant | <383>   .  472    . |
+  negative |    6  <11> 269    . |
+   neutral |    7    .<1148>   . |
+  positive |    1    .  256   <4>|
+-----------+---------------------+
+(row = reference; col = test)
+
+training and test data has been constructed for trigram
+training data length:2556
+test data length:2557
+classifier defined
+Most Informative Features
+contains(google android ics) = True           positi : irrele =     14.0 : 1.0
+contains(apple eclipsed microsoft) = True           negati : irrele =     12.6 : 1.0
+contains(how apple eclipsed) = True           negati : irrele =     10.7 : 1.0
+contains(thank you apple) = True           positi : neutra =     10.6 : 1.0
+      contains(i had to) = True           negati : neutra =      9.6 : 1.0
+             precision    recall  f1-score   support
+
+ irrelevant       0.96      0.15      0.27       855
+   negative       1.00      0.02      0.04       286
+    neutral       0.48      1.00      0.65      1155
+   positive       1.00      0.02      0.03       261
+
+avg / total       0.75      0.51      0.39      2557
+
+Confusion Matrix
+           |    i                |
+           |    r                |
+           |    r    n         p |
+           |    e    e    n    o |
+           |    l    g    e    s |
+           |    e    a    u    i |
+           |    v    t    t    t |
+           |    a    i    r    i |
+           |    n    v    a    v |
+           |    t    e    l    e |
+-----------+---------------------+
+irrelevant | <132>   .  723    . |
+  negative |    4   <6> 276    . |
+   neutral |    .    .<1155>   . |
+  positive |    2    .  255   <4>|
+-----------+---------------------+
+(row = reference; col = test)

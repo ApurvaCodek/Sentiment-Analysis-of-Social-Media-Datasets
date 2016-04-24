@@ -1,0 +1,111 @@
+training and test data has been constructed
+training data length:4832
+test data length:4832
+test data stats
+classifier defined
+Most Informative Features
+          contains(good) = True           positi : object =     30.9 : 1.0
+          contains(love) = True           positi : object =     22.2 : 1.0
+         contains(happy) = True           positi : neutra =     21.3 : 1.0
+       contains(excited) = True           positi : object =     20.4 : 1.0
+           contains(bad) = True           negati : object =     20.3 : 1.0
+             precision    recall  f1-score   support
+
+   negative       0.56      0.11      0.19       736
+    neutral       0.26      0.05      0.08       848
+  objective       0.50      0.37      0.42      1437
+   positive       0.45      0.87      0.60      1811
+
+avg / total       0.45      0.46      0.39      4832
+
+Confusion Matrix
+          |              o      |
+          |    n         b    p |
+          |    e    n    j    o |
+          |    g    e    e    s |
+          |    a    u    c    i |
+          |    t    t    t    t |
+          |    i    r    i    i |
+          |    v    a    v    v |
+          |    e    l    e    e |
+----------+---------------------+
+ negative |  <82>  34  107  513 |
+  neutral |   18  <43> 233  554 |
+objective |   26   57 <527> 827 |
+ positive |   20   30  183<1578>|
+----------+---------------------+
+(row = reference; col = test)
+
+training and test data has been constructed for bigram
+training data length:4832
+test data length:4832
+classifier defined
+Most Informative Features
+        contains(i dont) = True           negati : object =     22.9 : 1.0
+     contains(not going) = True           negati : positi =     14.4 : 1.0
+    contains(forward to) = True           positi : object =     11.6 : 1.0
+contains(looking forward) = True           positi : object =     11.1 : 1.0
+        contains(im not) = True           negati : positi =     10.6 : 1.0
+             precision    recall  f1-score   support
+
+   negative       0.77      0.01      0.03       736
+    neutral       0.38      0.01      0.03       848
+  objective       0.57      0.08      0.14      1437
+   positive       0.39      0.98      0.56      1811
+
+avg / total       0.50      0.40      0.26      4832
+
+Confusion Matrix
+          |              o      |
+          |    n         b    p |
+          |    e    n    j    o |
+          |    g    e    e    s |
+          |    a    u    c    i |
+          |    t    t    t    t |
+          |    i    r    i    i |
+          |    v    a    v    v |
+          |    e    l    e    e |
+----------+---------------------+
+ negative |  <10>   .   16  710 |
+  neutral |    1  <11>  47  789 |
+objective |    1   14 <119>1303 |
+ positive |    1    4   26<1780>|
+----------+---------------------+
+(row = reference; col = test)
+
+training and test data has been constructed for trigram
+training data length:4832
+test data length:4832
+classifier defined
+Most Informative Features
+contains(looking forward to) = True           positi : object =     10.1 : 1.0
+    contains(want to go) = True           negati : positi =      9.3 : 1.0
+  contains(dont want to) = True           negati : positi =      9.3 : 1.0
+  contains(im not going) = True           negati : positi =      7.6 : 1.0
+    contains(have to go) = True           negati : positi =      7.6 : 1.0
+             precision    recall  f1-score   support
+
+   negative       0.82      0.01      0.02       736
+    neutral       0.32      0.01      0.01       848
+  objective       0.55      0.05      0.10      1437
+   positive       0.38      0.99      0.55      1811
+
+avg / total       0.49      0.39      0.24      4832
+
+Confusion Matrix
+          |              o      |
+          |    n         b    p |
+          |    e    n    j    o |
+          |    g    e    e    s |
+          |    a    u    c    i |
+          |    t    t    t    t |
+          |    i    r    i    i |
+          |    v    a    v    v |
+          |    e    l    e    e |
+----------+---------------------+
+ negative |   <9>   .    8  719 |
+  neutral |    .   <6>  34  808 |
+objective |    2   10  <76>1349 |
+ positive |    .    3   19<1789>|
+----------+---------------------+
+(row = reference; col = test)

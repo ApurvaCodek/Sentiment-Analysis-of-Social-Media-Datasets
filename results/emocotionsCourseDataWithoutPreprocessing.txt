@@ -1,0 +1,83 @@
+training and test data has been constructed
+training data length:4832
+test data length:4832
+test data stats
+positive  sentiment:1799
+negative  sentiment:733
+neutral   sentiment:872
+objective sentiment:1428
+classifier defined
+Most Informative Features
+     contains(emocsmile) = True           positi : negati =     29.0 : 1.0
+         contains(great) = True           positi : neutra =     22.5 : 1.0
+         contains(happy) = True           positi : object =     21.5 : 1.0
+       contains(emocsad) = True           negati : positi =     20.8 : 1.0
+          contains(good) = True           positi : object =     13.5 : 1.0
+             precision    recall  f1-score   support
+
+   negative       0.50      0.07      0.13       733
+    neutral       0.28      0.05      0.08       872
+  objective       0.47      0.36      0.41      1428
+   positive       0.45      0.88      0.60      1799
+
+avg / total       0.43      0.45      0.38      4832
+
+Confusion Matrix
+          |              o      |
+          |    n         b    p |
+          |    e    n    j    o |
+          |    g    e    e    s |
+          |    a    u    c    i |
+          |    t    t    t    t |
+          |    i    r    i    i |
+          |    v    a    v    v |
+          |    e    l    e    e |
+----------+---------------------+
+ negative |  <54>  24  146  509 |
+  neutral |   19  <41> 243  569 |
+objective |   22   56 <519> 831 |
+ positive |   14   23  187<1575>|
+----------+---------------------+
+(row = reference; col = test)
+
+training and test data has been constructed for bigram
+training data length:4832
+test data length:4832
+classifier defined
+Most Informative Features
+        contains(i love) = True           positi : object =     15.2 : 1.0
+contains(looking forward) = True           positi : object =     11.6 : 1.0
+  contains(good morning) = True           positi : object =      9.5 : 1.0
+   contains(rugby world) = True           negati : positi =      9.3 : 1.0
+      contains(i really) = True           negati : object =      8.5 : 1.0
+             precision    recall  f1-score   support
+
+   negative       0.59      0.01      0.03       733
+    neutral       0.26      0.01      0.01       872
+  objective       0.52      0.07      0.13      1428
+   positive       0.38      0.98      0.55      1799
+
+avg / total       0.43      0.39      0.25      4832
+
+Confusion Matrix
+          |              o      |
+          |    n         b    p |
+          |    e    n    j    o |
+          |    g    e    e    s |
+          |    a    u    c    i |
+          |    t    t    t    t |
+          |    i    r    i    i |
+          |    v    a    v    v |
+          |    e    l    e    e |
+----------+---------------------+
+ negative |  <10>   1   18  704 |
+  neutral |    1   <6>  45  820 |
+objective |    5   12 <107>1304 |
+ positive |    1    4   36<1758>|
+----------+---------------------+
+(row = reference; col = test)
+
+training and test data has been constructed for trigram
+training data length:4832
+test data length:4832
+classifier defined

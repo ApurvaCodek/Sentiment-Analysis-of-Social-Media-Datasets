@@ -26,28 +26,6 @@ def split_list(a_list):
     half = len(a_list)/2
     return a_list[:half], a_list[half:]
 
-def find_emoticons(sentence):
-    sentence = sentence.replace(':-)' ,'emocsmile')
-    sentence = sentence.replace(':)'  ,'emocsmile')
-    sentence = sentence.replace(':))' ,'emocsmile')
-    sentence = sentence.replace(':-(' ,'emocsad')
-    sentence = sentence.replace(':('  ,'emocsad')
-    sentence = sentence.replace(':((' ,'emocsad')
-    sentence = sentence.replace(';-)' ,'emocwink')
-    sentence = sentence.replace(':-D' ,'emoctongue')
-    sentence = sentence.replace(':-[' ,'emocembrassed')
-    sentence = sentence.replace(':-\\','emocundecided')
-    sentence = sentence.replace('=-0' ,'emocsurprise')
-    sentence = sentence.replace(':-*' ,'emockiss')
-    sentence = sentence.replace('>:o' ,'emocyell')
-    sentence = sentence.replace('8-)' ,'emoccool')
-    sentence = sentence.replace(':-$' ,'emocmoney')
-    sentence = sentence.replace(':-!' ,'emocfoot')
-    sentence = sentence.replace('O:-)','emocinnocent')
-    sentence = sentence.replace(':\'(','emoccry')
-    sentence = sentence.replace(':-X' ,'emocsealed')
-    return sentence
-
 def remove_stoppers(sentence,stopset):
     querywords  = sentence.split()
     resultwords = sentence.split()
@@ -78,6 +56,8 @@ def extract_features(document):
     
 def bigramReturner (tweetString):
     tweetString = tweetString.lower()
+    #remove punctuation
+    tweetString = strip_punctuation(tweetString)
     bigramFeatureVector = []
     for item in nltk.bigrams(tweetString.split()):
         bigramFeatureVector.append(' '.join(item))
@@ -119,9 +99,8 @@ next(tweets)
 for flines in tweets:
     sentence = flines[3]
     sentiment = flines[2]
-    sentence = find_emoticons(sentence)
     sentence = strip_punctuation(sentence)
-    sentence = remove_stoppers(sentence,stopset)
+    #sentence = remove_stoppers(sentence,stopset)
     
     bigram_sentence = bigramReturner(sentence)
     trigram_sentence = trigramReturner(sentence)
@@ -152,7 +131,7 @@ for (sentence,sentiment) in test_data:
         countObj = countObj + 1
     elif sentiment == 'objective-OR-neutral':
         sentiment = 'objective'
-        countObj  = countObj + 1
+    countObj  = countObj + 1
 print 'test data stats'
 print 'positive  sentiment:%d' %countPos
 print 'negative  sentiment:%d' %countNeg
